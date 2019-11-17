@@ -7,14 +7,21 @@ class SearchBar extends React.Component {
     this.setState({ searchQuery: e.target.value });
   }
 
+  onFormSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSearchFormSubmit(this.state.searchQuery);
+  }
+
   render() {
     return (
-      <form className='ui form'>
-        <div className='field'>
-          <label>Search for Videos</label>
-          <input type="text" value={this.state.searchQuery} onChange={(e) => this.onSearchQueryChange(e)} />
-        </div>
-      </form>
+      <div className='search-bar ui segment'>
+        <form className='ui form' onSubmit={(e) => this.onFormSubmit(e)}>
+          <div className='field'>
+            <label>Search for Videos</label>
+            <input placeholder="Enter a term to Search" type="text" value={this.state.searchQuery} onChange={(e) => this.onSearchQueryChange(e)} />
+          </div>
+        </form>
+      </div>
     );
   }
 
